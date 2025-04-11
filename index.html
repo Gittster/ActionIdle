@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ActionIdle</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="script.js"></script>
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex flex-col items-center">
+    <div id="tooltip" class="tooltip"></div>
+    <header class="w-full bg-gray-800 p-4 text-center text-2xl font-bold">ActionIdle</header>
+    <main id="app" class="p-4 w-full max-w-2xl">
+    <!-- Main Menu Screen -->
+    <section id="mainMenu">
+      <h2 class="text-xl font-bold mb-4">Character Selection</h2>
+
+      <div class="mb-4">
+        <button onclick="toggleNewCharForm()" class="btn">Create New Character</button>
+      </div>
+
+      <div id="newCharForm" class="mb-4 hidden">
+        <label class="block mb-2">New Character Name:</label>
+        <input id="newCharName" type="text" class="w-full p-2 text-black rounded" placeholder="Enter name" />
+
+        <label class="block mt-4 mb-2">Choose Class:</label>
+        <select id="charClass" class="w-full p-2 text-black rounded">
+          <option value="Ranger">Ranger</option>
+          <option value="Mage">Mage</option>
+          <option value="Warrior">Warrior</option>
+        </select>
+
+        <button onclick="createCharacter()" class="btn mt-2">Create Character</button>
+      </div>
+
+      <div class="mb-4">
+        <p>Current Character: <span id="currentCharacterName" class="font-semibold">None</span></p>
+        <button id="launchGameBtn" class="btn" onclick="launchGame()" disabled>Launch Game</button>
+      </div>
+
+      <div class="mb-4">
+        <h3 class="text-lg font-semibold mb-2">Your Characters:</h3>
+        <ul id="characterList" class="space-y-2"></ul>
+      </div>
+    </section>
+
+    <!-- Town Screen -->
+    <div id="town" class="screen hidden">
+        <h2 class="text-xl mb-4">Town</h2>
+        <div class="flex space-x-2 mb-4">
+        <button class="btn" onclick="loadAndShowCharacter()">Character</button>
+        <button class="btn bg-yellow-600 hover:bg-yellow-700" onclick="returnToMainMenu()">Back to Main Menu</button>
+        </div>
+        <p class="text-gray-400">Welcome to town. (More features coming soon!)</p>
+    </div>
+    
+    <!-- Character Screen -->
+    <div id="character" class="screen hidden max-w-4xl mx-auto">
+        <h2 class="text-xl mb-4">Character Equipment</h2>
+    
+        <div class="bg-gray-800 p-4 rounded-lg border border-gray-600 mb-6">
+        <h3 class="font-semibold mb-2 border-b border-gray-600 pb-1">Equipment</h3>
+        <div id="equipmentSlots" class="grid grid-cols-2 gap-2">
+            <!-- Equipment slots will be rendered here -->
+        </div>
+        </div>
+    
+        <div class="bg-gray-800 p-4 rounded-lg border border-gray-600">
+        <h3 class="font-semibold mb-2 border-b border-gray-600 pb-1">Inventory</h3>
+        <ul id="inventoryList" class="space-y-2">
+            <!-- Inventory items will be rendered here -->
+        </ul>
+        </div>
+    
+        <div class="mt-6">
+            <!-- Stats Summary -->
+        <div class="bg-gray-800 p-4 rounded-lg border border-gray-600 mt-6">
+            <h3 class="font-semibold mb-2 border-b border-gray-600 pb-1">Stats Summary</h3>
+            <ul id="statsSummary" class="text-sm space-y-1 text-gray-200">
+            <!-- Populated via JS -->
+            </ul>
+        </div>
+  
+        <button class="btn" onclick="showScreen('town')">Back to Town</button>
+        </div>
+    </div>
+  
+  
+  
+  
+    <!-- Zone Screen -->
+    <section id="zone" class="screen hidden">
+      <h2 class="text-xl font-bold mb-4">Zone</h2>
+      <p>Start a new zone run and engage in timer-based combat.</p>
+    </section>
+  </main>
+
+  <script>
+    function toggleNewCharForm() {
+      const form = document.getElementById("newCharForm");
+      form.classList.toggle("hidden");
+    }
+  </script>
+</body>
+</html>
